@@ -3,59 +3,66 @@
 This project is built with **Next.js** and **Prisma**. To deploy it successfully on Hostinger, follow these steps.
 
 ## Prerequisites
-1. **Hostinger VPS** (Recommended) or **Hostinger Node.js Hosting**.
+1. **Hostinger Node.js Hosting** (Business or standard Node.js plan).
 2. A **MySQL Database** created in your Hostinger hPanel.
-3. Node.js (v18+) installed on your server.
+3. Node.js (v18 or v20) selected in Hostinger.
 
 ---
 
-## Step 1: Prepare Environment Variables
-Configure your environment variables in Hostinger (hPanel Node.js settings or `.env` file on VPS).
+## Step 1: Environment Variables
+Add these in the **Node.js** section of your Hostinger hPanel:
 
 ```env
-DATABASE_URL="mysql://USER:PASSWORD@HOSTNAME:3306/DATABASE_NAME"
-JWT_SECRET="generate_a_random_long_string_here"
+DATABASE_URL="mysql://USER:PASSWORD@127.0.0.1:3306/DATABASE_NAME"
+JWT_SECRET="equator_bridges_premium_secret_2025"
 NEXT_PUBLIC_APP_URL="https://yourdomain.com"
+NODE_ENV="production"
+PORT=3000
+
+# Email (Nodemailer)
+EMAIL_SERVER_HOST="smtp.gmail.com"
+EMAIL_SERVER_PORT=587
+EMAIL_SERVER_USER="your-email@gmail.com"
+EMAIL_SERVER_PASSWORD="your-app-password"
+EMAIL_FROM="Equator Bridges <noreply@yourdomain.com>"
 ```
 
-## Step 2: Database Initialization
-Before starting the app, you must push the schema to your Hostinger database:
-```bash
-npx prisma db push
-```
-Then, seed the initial data:
-```bash
-node prisma/seed.js
-```
+---
 
-## Step 3: Build the Application
-On your server (or via CI/CD), run:
-```bash
-npm install
-npm run build
-```
+## Step 2: Server Configuration
+In the Hostinger Node.js Dashboard:
+1. **Application Start File**: `.next/standalone/server.js`
+2. **Command**: (Leave empty or set to `start`)
 
-## Step 4: Starting the App
+---
 
-### Option A: Hostinger Node.js Hosting (Shared/Cloud)
-1. In hPanel, go to **Node.js**.
-2. Set the **Application Start File** to `node_modules/next/dist/bin/next`.
-3. Set the **Command** to `start`.
-4. Ensure your **Environment Variables** are added in the hPanel.
+## Step 3: Deployment via Terminal (SSH)
+Connect to your server via SSH and run:
 
-### Option B: VPS (Using PM2 - Recommended)
-Install PM2 globally:
-```bash
-npm install -g pm2
-```
-Start the application:
-```bash
-pm2 start npm --name "equator-bridges" -- start
-pm2 save
-pm2 startup
-```
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Database Push**:
+   ```bash
+   npx prisma db push
+   ```
+
+3. **Build the Application**:
+   ```bash
+   npm run build
+   ```
+
+4. **Copy Public Files** (Next.js standalone requirement):
+   ```bash
+   cp -r public .next/standalone/
+   cp -r .next/static .next/standalone/.next/
+   ```
+
+---
 
 ## Troubleshooting
-- **Database Connection Error**: Ensure **Remote MySQL** is enabled in Hostinger and that your IP (or `%`) is whitelisted.
-- **Port Conflict**: Next.js defaults to port `3000`. If Hostinger provides a specific port via `process.env.PORT`, Next.js will typically honor it.
-- **Prisma Client**: If you see "PrismaClient did not initialize", run `npx prisma generate` on the server.
+- **Database Connection Error**: Use `127.0.0.1` instead of `localhost` in the connection string.
+- **Port Conflict**: Hostinger usually assigns a port; the app will automatically use it via `process.env.PORT`.
+- **Images not showing**: Ensure `unoptimized: true` is in `next.config.mjs` (it is already configured).
