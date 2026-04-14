@@ -92,10 +92,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-sm">
+        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>© {currentYear} Equator Bridges Partners OPC Pvt Ltd. {t("footer.rights")}</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <span className="text-slate-500">{t("footer.made_with")}</span>
+          <div className="flex space-x-6 mt-4 md:mt-0 items-center">
+            <p className="text-slate-500 font-medium">
+              Developed by <a href="https://kalidetech.com" target="_blank" rel="noopener noreferrer" className="text-primary-500 font-bold hover:text-primary-400 transition-colors">Kalide Tech</a>
+            </p>
           </div>
         </div>
       </div>
