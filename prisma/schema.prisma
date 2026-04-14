@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  firstName     String
+  lastName      String
+  password      String
+  role          String    @default("CLIENT") // CLIENT, ADMIN
+  status        String    @default("ACTIVE") // ACTIVE, BLOCKED
+  language      String    @default("EN")     // EN, FR
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  applications  Application[]
+  payments      Payment[]
+  bookings      Booking[]
+  shipments     Shipment[]
+  notifications Notification[]
+  sentMessages      Message[] @relation("SentMessages")
+  receivedMessages  Message[] @relation("ReceivedMessages")
+}
+
+model Application {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  serviceType   String    // MEDICAL, EDUCATION, BUSINESS, CARGO, HOSPITALITY, TRAVEL
+  status        String    @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, REJECTED
+  notes         String?   @db.Text
+  documents     Document[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Document {
+  id            String    @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  name          String
+  url           String    // Cloudinary or S3 link
+  type          String
+  createdAt     DateTime  @default(now())
+}
+
+model Payment {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  service       String
+  package       String
+  amount        Float
+  currency      String    @default("USD")
+  status        String    @default("PENDING") // PENDING, SUCCESS, FAILED
+  transactionId String?   @unique
+  gateway       String?   // STRIPE, RAZORPAY, FLUTTERWAVE
+  createdAt     DateTime  @default(now())
+}
+
+model Booking {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  service       String
+  date          DateTime
+  time          String
+  status        String    @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  createdAt     DateTime  @default(now())
+}
+
+model Shipment {
+  id              String    @id @default(cuid())
+  trackingId      String    @unique
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  origin          String
+  destination     String
+  weight          Float
+  status          String    @default("BOOKED") // BOOKED, IN_TRANSIT, ARRIVED, DELIVERED
+  currentLocation String?
+  price           Float
+  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
+}
+
+model Message {
+  id            String    @id @default(cuid())
+  senderId      String
+  sender        User      @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId    String
+  receiver      User      @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  content       String    @db.Text
+  read          Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+}
+
+model Notification {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  title         String
+  message       String    @db.Text
+  read          Boolean   @default(false)
+  type          String    // PAYMENT, BOOKING, APPLICATION, SYSTEM
+  createdAt     DateTime  @default(now())
+}
+
+model SeoSetting {
+  id          String   @id @default("global")
+  title       String
+  description String   @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryItem {
+  id          String   @id @default(cuid())
+  url         String   @unique
+  description String?
+  isCarousel  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String?
+  location  String?
+  text      String   @db.Text
+  createdAt DateTime @default(now())
+}
+
+model Service {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  iconType         String   @default("Briefcase")
+  description      String   @db.Text
+  fullDescription  String?  @db.Text
+  createdAt        DateTime @default(now())
+}
+
+model Inquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  service   String?
+  message   String   @db.Text
+  status    String   @default("NEW") // NEW, READ, ARCHIVED
+  createdAt DateTime @default(now())
+}

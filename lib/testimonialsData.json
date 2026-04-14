@@ -1,0 +1,23 @@
+[
+  {
+    "id": "t1",
+    "name": "Jean-Pierre Kabangu",
+    "role": "Medical Tourism Client",
+    "text": "The coordination between Equator bridges and the hospital in India was seamless. My family was well cared for throughout.",
+    "location": "DR Congo"
+  },
+  {
+    "id": "t2",
+    "name": "Moussa Traoré",
+    "role": "Business Facilitation",
+    "text": "Incorporating our export company in UAE was handled in record time. Their market knowledge is unmatched.",
+    "location": "Mali"
+  },
+  {
+    "id": "t3",
+    "name": "Amara Okonkwo",
+    "role": "Education Consultant",
+    "text": "Got my daughter into a top Malaysian university with a full scholarship. We couldn't have done it without their guidance.",
+    "location": "Nigeria"
+  }
+]

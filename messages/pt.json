@@ -1,0 +1,121 @@
+{
+  "common": {
+    "login": "Entrar",
+    "register": "Registrar",
+    "home": "Início",
+    "about": "Sobre",
+    "services": "Serviços",
+    "countries": "Países",
+    "cargo": "Carga & Logística",
+    "contact": "Contato",
+    "getStarted": "Começar",
+    "logout": "Sair",
+    "dashboard": "Painel",
+    "language": "Idioma",
+    "viewMore": "Ver Mais",
+    "viewAll": "Ver Tudo",
+    "consultation": "Consulta Gratuita",
+    "gallery": "Galeria"
+  },
+  "hero": {
+    "badge": "Conectando África ↔ Ásia",
+    "title": "Unindo o hiato para a excelência",
+    "title_highlight": "global",
+    "description": "A Equator Bridges Partners oferece serviços de turismo médico, educação e facilitação de negócios de classe mundial para o continente africano.",
+    "cta_explore": "Explorar Serviços",
+    "cta_consult": "Consulta Gratuita",
+    "stats_clients": "Colocações Médicas e Educacionais bem-sucedidas em 2025",
+    "support": "Atendimento ao Cliente 24/7",
+    "verified": "Parceiros Verificados",
+    "gateway": "Gateway Direto"
+  },
+  "services": {
+    "section_title": "Experiência Global, Foco Local",
+    "section_subtitle": "Capacitando indivíduos e empresas em dois continentes através de serviços especializados e confiáveis."
+  },
+  "whyUs": {
+    "title": "Por que os Africanos escolhem a Equator Bridges Partners?",
+    "subtitle": "Na última década, construímos uma reputação de confiança e eficiência, levando a melhor infraestrutura asiática para as comunidades africanas.",
+    "stat_title": "15k+",
+    "stat_desc": "Clientes facilitados com sucesso desde a fundação",
+    "p1_title": "Porta Direta para a Excelência",
+    "p1_desc": "Somos seu parceiro local com raízes profundas nos mercados africano e asiático.",
+    "p2_title": "Soluções Econômicas",
+    "p2_desc": "Logística otimizada e parcerias que reduzem custos em projetos médicos e educacionais.",
+    "p3_title": "Rede de Suporte Confiável",
+    "p3_desc": "Gerentes dedicados fornecendo assistência 24/7 em diferentes fusos horários.",
+    "p4_title": "Parcerias Verificadas",
+    "p4_desc": "Trabalhamos apenas com hospitais e universidades de primeira linha."
+  },
+  "cta_section": {
+    "badge": "Conecte-se com Especialistas",
+    "title": "Pronto para Construir Seu Futuro Hoje?",
+    "subtitle": "Agende uma consultoria grátis com nossos parceiros regionais e inicie sua jornada para a excelência.",
+    "btn_start": "Começar Agora",
+    "btn_whatsapp": "Contate no WhatsApp"
+  },
+  "gallery": {
+    "title_main": "O Nosso Impacto ",
+    "title_highlight": "Global",
+    "description": "Visualizar as pontes que construímos entre continentes através dos nossos serviços abrangentes.",
+    "items": {
+      "medical": {
+        "title": "Excelência no Turismo Médico",
+        "category": "Saúde"
+      },
+      "education": {
+        "title": "Consultoria em Educação Global",
+        "category": "Educação"
+      },
+      "business": {
+        "title": "Abertura de Empresas Corporativas",
+        "category": "Investimento"
+      },
+      "logistics": {
+        "title": "Carga & Logística Internacional",
+        "category": "Logística"
+      }
+    }
+  },
+  "countries_section": {
+    "title": "A Nossa Rede Operacional",
+    "subtitle": "Fornecemos cobertura abrangente nos principais centros da Ásia e África com experiência local.",
+    "view_all": "Ver Todos Os Países",
+    "services_available": "Serviços Disponíveis"
+  },
+  "testimonials": {
+    "title": "O Que Nossos Clientes Dizem",
+    "subtitle": "Histórias reais de indivíduos e líderes empresariais que confiam em nós."
+  },
+  "footer": {
+    "desc": "Conectar a África e a Ásia através da excelência em serviços globais. O seu parceiro de confiança mundial.",
+    "quick_links": "Links Rápidos",
+    "policies": "Políticas",
+    "contact_info": "Contato",
+    "made_with": "Criado com excelência para a África",
+    "rights": "Todos os direitos reservados."
+  },
+  "auth": {
+    "loginTitle": "Entrar no Equator",
+    "loginSubtitle": "Aceda aos seus serviços globais e acompanhe as suas candidaturas",
+    "registerTitle": "Criar Conta",
+    "registerSubtitle": "Junte-se a milhares de indivíduos que constroem o seu futuro entre continentes.",
+    "emailPlaceholder": "seu@email.com",
+    "passwordPlaceholder": "Senha",
+    "firstNamePlaceholder": "Primeiro Nome",
+    "lastNamePlaceholder": "Último Nome",
+    "rememberMe": "Lembrar-me",
+    "forgotPassword": "Esqueceu a senha?",
+    "signInBtn": "Entrar",
+    "registerBtn": "Registar Conta",
+    "noAccount": "Não tem uma conta?",
+    "hasAccount": "Já tem uma conta?",
+    "signInInstead": "Entrar em vez disso",
+    "registerNow": "Registe-se agora",
+    "interestTitle": "Estou interessado em",
+    "returnHome": "Voltar ao Início",
+    "agreeTerms": "Ao registar-se, concorda com os nossos Termos de Serviço e Política de Privacidade.",
+    "authenticating": "Autenticando...",
+    "creating": "Criando Conta..."
+  }
+}

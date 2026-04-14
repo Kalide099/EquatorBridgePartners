@@ -1,0 +1,121 @@
+{
+  "common": {
+    "login": "Login",
+    "register": "Register",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "countries": "Countries",
+    "cargo": "Cargo",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "language": "Language",
+    "viewMore": "View More",
+    "viewAll": "View All",
+    "consultation": "Get Free Consultation",
+    "gallery": "Gallery"
+  },
+  "hero": {
+    "badge": "Connecting Africa ↔ Asia",
+    "title": "Bridging the Gap for Global Excellence",
+    "title_highlight": "Global",
+    "description": "Equator Bridges Partners provides world-class medical tourism, education, and business facilitation services tailored for the African continent.",
+    "cta_explore": "Explore Services",
+    "cta_consult": "Free Consultation",
+    "stats_clients": "Successful Medical & Educational Placements in 2025",
+    "support": "Customer Support",
+    "verified": "Verified Partners",
+    "gateway": "Direct Gateway"
+  },
+  "services": {
+    "section_title": "Global Expertise, Local Focus",
+    "section_subtitle": "Empowering individuals and businesses across two continents through specialized, reliable services that matter."
+  },
+  "whyUs": {
+    "title": "Why Africans Choose Equator Bridges Partners?",
+    "subtitle": "Over the past decade, we have built a reputation for trust and efficiency, bringing the best of Asian infrastructure to African communities.",
+    "stat_title": "15k+",
+    "stat_desc": "Clients Successfully Facilitated Since Incorporation",
+    "p1_title": "Direct Gateway to Excellence",
+    "p1_desc": "We are your on-ground partner with deep roots in both African and Asian markets.",
+    "p2_title": "Cost-Effective Solutions",
+    "p2_desc": "Optimized logistics and partnerships that lower costs for medical and educational pursuits.",
+    "p3_title": "Reliable Support Network",
+    "p3_desc": "Dedicated account managers providing 24/7 assistance across time zones.",
+    "p4_title": "Verified Partnerships",
+    "p4_desc": "We only work with top-tier accredited hospitals and universities."
+  },
+  "cta_section": {
+    "badge": "Connect with Global Experts",
+    "title": "Ready to Bridge Your Future Today?",
+    "subtitle": "Schedule a free consultation with our regional partners and start your journey towards excellence across Africa and Asia.",
+    "btn_start": "Get Started Now",
+    "btn_whatsapp": "Contact on WhatsApp"
+  },
+  "gallery": {
+    "title_main": "Our Global ",
+    "title_highlight": "Impact",
+    "description": "Visualizing the bridges we build across continents through our comprehensive services.",
+    "items": {
+      "medical": {
+        "title": "Medical Tourism Excellence",
+        "category": "Healthcare"
+      },
+      "education": {
+        "title": "Global Education Consultancy",
+        "category": "Education"
+      },
+      "business": {
+        "title": "Corporate Business Setup",
+        "category": "Investment"
+      },
+      "logistics": {
+        "title": "International Cargo & Logistics",
+        "category": "Logistics"
+      }
+    }
+  },
+  "countries_section": {
+    "title": "Our Operational Network",
+    "subtitle": "We provide comprehensive coverage across major Asian and African hubs with localized expertise in every region.",
+    "view_all": "View All Countries",
+    "services_available": "Services Available"
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Real stories from individuals and business leaders who trust us with their global aspirations."
+  },
+  "footer": {
+    "desc": "Connecting Africa and Asia through excellence in global services. Your trusted partner for medical, education, business, and logistics across borders.",
+    "quick_links": "Quick Links",
+    "policies": "Policies",
+    "contact_info": "Contact Info",
+    "made_with": "Made with excellence for Africa",
+    "rights": "All rights reserved."
+  },
+  "auth": {
+    "loginTitle": "Login to Equator",
+    "loginSubtitle": "Access your global services and track applications",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Join thousands of individuals bridging their future across continents.",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "Password",
+    "firstNamePlaceholder": "First Name",
+    "lastNamePlaceholder": "Last Name",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signInBtn": "Sign In",
+    "registerBtn": "Register Account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signInInstead": "Sign in instead",
+    "registerNow": "Register now",
+    "interestTitle": "I am interested in",
+    "returnHome": "Return to Home",
+    "agreeTerms": "By registering, you agree to our Terms of Service and Privacy Policy for global operations.",
+    "authenticating": "Authenticating...",
+    "creating": "Creating Account..."
+  }
+}

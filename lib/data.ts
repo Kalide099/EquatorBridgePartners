@@ -1,0 +1,173 @@
+import { 
+  Stethoscope, 
+  GraduationCap, 
+  Briefcase, 
+  Truck, 
+  Utensils, 
+  PlaneTakeoff,
+  Globe,
+  Users,
+  ShieldCheck,
+  CreditCard,
+  Activity,
+  Wrench
+} from 'lucide-react';
+
+export const services = [
+  {
+    id: "medical-tourism",
+    title: "Medical Tourism",
+    slug: "medical-tourism",
+    icon: Stethoscope,
+    description: "Access world-class healthcare in India and across Asia. Connect with leading specialists for complex treatments.",
+    fullDescription: "Equator Bridges Partners connects African patients with premier medical facilities in India, UAE, and other Asian hubs. We ensure high-quality care, coordination, and cost-effective medical solutions.",
+    features: [
+      "Hospital Selection & Booking",
+      "Visa Assistance & Documentation",
+      "Language Translation Services",
+      "Post-Treatment Support"
+    ],
+    pricing: {
+      basic: { price: "$500", name: "Standard Package", features: ["Airport Pickup", "Hospital Coordination", "Accommodation Search"] },
+      premium: { price: "$1,200", name: "VIP Care", features: ["Private Nurse", "Luxury Accommodation", "Global Insurance Help"] }
+    }
+  },
+  {
+    id: "education",
+    title: "Education Consultancy",
+    slug: "education-consultancy",
+    icon: GraduationCap,
+    description: "Your academic future abroad starts here. Expert guidance for admissions in top Asian universities.",
+    fullDescription: "From choosing the right course to securing scholarship opportunities, our education consultants provide end-to-end support for African students aspiring to study in India, China, Malaysia, and beyond.",
+    features: [
+      "University Admission Guidance",
+      "Scholarship Assistance",
+      "Course Selection Strategy",
+      "Student Visa Support"
+    ],
+    pricing: {
+      basic: { price: "$200", name: "Admission Aid", features: ["1 University Application", "Initial Profile Review"] },
+      premium: { price: "$750", name: "Full Scholarship Mentorship", features: ["Unlimited Applications", "Scholarship Interview Prep", "Visa Support"] }
+    }
+  },
+  {
+    id: "business",
+    title: "Business Facilitation",
+    slug: "business-facilitation",
+    icon: Briefcase,
+    description: "Bridge the gap between African markets and Asian trade opportunities. Expand your business reach.",
+    fullDescription: "We act as your on-ground partner for business setup, company registration, and supply chain management across Asian markets (China, UAE, India).",
+    features: [
+      "Market Research & Insights",
+      "Company Incorporation Aid",
+      "Trade Partner Matching",
+      "Regulatory Compliance Help"
+    ],
+    pricing: {
+      basic: { price: "$1,000", name: "Consultation Pro", features: ["Market Analysis Report", "Legal Overview"] },
+      premium: { price: "$3,500", name: "Market Entry Plan", features: ["Full Incorporation Assistance", "Partner Selection Visits"] }
+    }
+  },
+  {
+    id: "cargo",
+    title: "Cargo & Logistics",
+    slug: "cargo-and-logistics",
+    icon: Truck,
+    description: "Seamless door-to-door shipping solutions from Asia to Africa. Reliable, fast, and secure.",
+    fullDescription: "Specialized in large-scale logistics and personal parcel shipments. We provide cost-effective air and sea freight options for all your business needs.",
+    features: [
+      "Freight Forwarding",
+      "Customs Clearance",
+      "Warehouse Solutions",
+      "Real-time Shipment Tracking"
+    ],
+    pricing: {
+      basic: { price: "$10/kg", name: "Express Air", features: ["Door-to-Door", "5-7 Days Delivery"] },
+      premium: { price: "$2/kg", name: "Sea Freight Bulk", features: ["Minimum 100kg", "30-45 Days Delivery"] }
+    }
+  },
+  {
+    id: "hospitality",
+    title: "Catering & Hospitality",
+    slug: "catering-and-hospitality",
+    icon: Utensils,
+    description: "Premium catering and event management for corporate and personal celebrations.",
+    fullDescription: "Experience the fusion of African and Asian hospitality. From corporate catering to staffing solutions for premium hotels and events.",
+    features: [
+      "Event Catering Management",
+      "Hospitality Staff Training",
+      "Venue Sourcing",
+      "African-Asian Fusion Cuisine"
+    ],
+    pricing: {
+      basic: { price: "$50/person", name: "Standard Buffet", features: ["Multi-cuisine Menu", "Staff Services"] },
+      premium: { price: "$150/person", name: "Royal Gala", features: ["Executive Chef Demo", "Fine Dining Service", "Custom Decor"] }
+    }
+  },
+  {
+    id: "travel",
+    title: "Travel & Event Management",
+    slug: "travel-and-event-management",
+    icon: PlaneTakeoff,
+    description: "Curated travel experiences and seamless event planning for businesses and families.",
+    fullDescription: "Specializing in corporate retreats, trade fair delegations, and family holiday packages between Africa and Asia.",
+    features: [
+      "Custom Travel Itineraries",
+      "Trade Fair Logistics",
+      "Visa Support Services",
+      "Event Venue Management"
+    ],
+    pricing: {
+      basic: { price: "$300", name: "Travel Planning", features: ["Best Price Booking", "Itinerary Planning"] },
+      premium: { price: "$1,500", name: "Full VIP Concierge", features: ["Private Chauffeur", "Priority Lounge Access", "Hotel Upgrades"] }
+    }
+  },
+  {
+    id: "medical-training",
+    title: "Medical Training",
+    slug: "medical-training",
+    icon: Activity,
+    description: "Advanced medical training and certification programs for healthcare professionals in top Asian institutions.",
+    fullDescription: "We partner with leading medical universities and hospitals in Asia to offer specialized training, fellowships, and observational programs for African doctors, nurses, and technicians.",
+    features: [
+      "Specialty Fellowship Programs",
+      "Short-term Observational Courses",
+      "Simulation & Practical Training",
+      "International Medical Certification Support"
+    ],
+    pricing: {
+      basic: { price: "$800", name: "Observer Package", features: ["1-Month Placement", "Hospital Coordination"] },
+      premium: { price: "$2,500", name: "Fellowship Mentorship", features: ["Extended Placement", "Hands-on Training Guidance", "Certification Assistance"] }
+    }
+  },
+  {
+    id: "technical-training",
+    title: "Technical Training",
+    slug: "technical-training",
+    icon: Wrench,
+    description: "Industrial and technical skill development programs bridging African workforce with Asian expertise.",
+    fullDescription: "From engineering to IT and manufacturing, we facilitate technical training programs that equip the African workforce with cutting-edge skills and certifications from recognized industry leaders in Asia.",
+    features: [
+      "IT & Software Engineering Bootcamps",
+      "Industrial & Manufacturing Skills",
+      "Corporate Workshops",
+      "Global Tech Certifications"
+    ],
+    pricing: {
+      basic: { price: "$600", name: "Skill Builder", features: ["Online Modules", "Certification Guidance"] },
+      premium: { price: "$1,800", name: "Immersive Tech Exchange", features: ["On-site Asian Facility Training", "Mentorship", "Industry Placement Support"] }
+    }
+  }
+];
+
+export const countries = [
+  { name: "India", services: ["Medical", "Education", "Business", "Cargo", "Travel"] },
+  { name: "UAE", services: ["Business", "Cargo", "Tourism"] },
+  { name: "China", services: ["Business", "Education", "Cargo"] },
+  { name: "Malaysia", services: ["Education", "Tourism"] },
+  { name: "Japan", services: ["Business", "Cargo"] },
+  { name: "Philippines", services: ["Education", "Tourism"] },
+  { name: "Sri Lanka", services: ["Tourism"] },
+  { name: "Nepal", services: ["Tourism"] },
+  { name: "Bangladesh", services: ["Education", "Cargo"] }
+];
