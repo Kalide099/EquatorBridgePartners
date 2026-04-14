@@ -63,7 +63,7 @@ const Gallery = ({ uploads = [] }: { uploads?: { url: string, description: strin
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[300px] gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[250px] md:auto-rows-[300px] gap-4 md:gap-6">
           {galleryItems.map((item) => (
             <div 
               key={item.id} 

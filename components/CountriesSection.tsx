@@ -47,7 +47,7 @@ const CountriesSection = () => {
                   <div className="flex flex-wrap gap-2">
                      {country.services.map((svc, sIdx) => (
                         <span key={sIdx} className="px-3 py-1.5 bg-white/5 text-slate-300 text-xs font-semibold rounded-lg border border-white/5">
-                           {svc}
+                           {t(`services_list.${svc}`)}
                         </span>
                      ))}
                   </div>

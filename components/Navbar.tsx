@@ -70,7 +70,7 @@ const Navbar = () => {
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative w-12 h-12 flex items-center justify-center bg-white rounded-lg p-1 shadow-lg shadow-primary-500/30">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="Equator Bridges Logo" className="w-full h-full object-contain" />
+              <img src="/logo.jpeg" alt="Equator Bridges Logo" className="w-full h-full object-contain" />
             </div>
             <span className={`font-black text-xl tracking-wide hidden md:block text-white`}>
               EQUATOR BRIDGES
@@ -171,55 +171,59 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-slate-950 border-t border-white/5 animate-in slide-in-from-top duration-300">
-          <div className="px-4 pt-2 pb-6 space-y-2">
+        <div className="md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-slate-950/98 backdrop-blur-2xl z-40 overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="px-6 py-8 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-3 text-base font-bold text-slate-300 hover:bg-white/5 hover:text-white rounded-xl transition-colors"
+                className="block px-4 py-4 text-xl font-black text-slate-200 hover:bg-white/5 hover:text-white rounded-2xl transition-all active:scale-95 flex items-center justify-between group"
               >
-                {link.name}
+                <span>{link.name}</span>
+                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
             ))}
             
             {/* Mobile Lang Switcher */}
-            <div className="grid grid-cols-3 gap-2 px-3 py-4">
-               {languages.map((lang) => (
-                 <button
-                   key={lang.code}
-                   onClick={() => { setLocale(lang.code as any); setIsOpen(false); }}
-                   className={`px-3 py-2 text-xs font-black rounded-xl border bg-white/5 transition-all ${locale === lang.code ? 'border-primary-500 text-primary-400' : 'border-white/10 text-slate-400'}`}
-                 >
-                   {lang.flag}
-                 </button>
-               ))}
+            <div className="pt-6 border-t border-white/10">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4 px-4 italic">Select Language</p>
+              <div className="grid grid-cols-3 gap-3">
+                 {languages.map((lang) => (
+                   <button
+                     key={lang.code}
+                     onClick={() => { setLocale(lang.code as any); setIsOpen(false); }}
+                     className={`px-4 py-4 text-xs font-black rounded-2xl border transition-all ${locale === lang.code ? 'bg-primary-600 border-primary-500 text-white' : 'bg-white/5 border-white/10 text-slate-400'}`}
+                   >
+                     {lang.flag}
+                   </button>
+                 ))}
+              </div>
             </div>
 
-            <div className="border-t border-white/5 pt-4 space-y-2">
+            <div className="pt-8 space-y-4">
               {user ? (
                 <>
                   <Link 
                     href={user.role === "ADMIN" ? "/admin/dashboard" : "/dashboard"} 
                     onClick={() => setIsOpen(false)} 
-                    className="block px-3 py-3 text-base font-bold text-slate-300 hover:bg-white/5 rounded-xl transition-colors"
+                    className="block w-full px-6 py-4 text-center text-lg font-black text-white bg-white/10 rounded-2xl transition-all"
                   >
                     {t("common.dashboard")}
                   </Link>
                   <button 
                     onClick={() => { handleLogout(); setIsOpen(false); }} 
-                    className="w-full text-left block px-3 py-3 text-base font-bold text-red-500 hover:bg-red-500/10 rounded-xl transition-colors"
+                    className="w-full px-6 py-4 text-center text-lg font-black text-red-500 bg-red-500/10 rounded-2xl transition-all"
                   >
                     {t("common.logout")}
                   </button>
                 </>
               ) : (
                 <>
-                  <Link href="/login" onClick={() => setIsOpen(false)} className="block px-3 py-3 text-base font-bold text-slate-300 hover:bg-white/5 rounded-xl transition-colors">
+                  <Link href="/login" onClick={() => setIsOpen(false)} className="block w-full px-6 py-4 text-center text-lg font-black text-white bg-white/5 rounded-2xl border border-white/10 transition-all">
                     {t("common.login")}
                   </Link>
-                  <Link href="/register" onClick={() => setIsOpen(false)} className="block px-3 py-3 text-base font-black text-center bg-primary-600 text-white rounded-xl shadow-lg shadow-primary-500/20">
+                  <Link href="/register" onClick={() => setIsOpen(false)} className="block w-full px-6 py-5 text-center text-xl font-black bg-primary-600 text-white rounded-2xl shadow-2xl shadow-primary-500/40 transform active:scale-95 transition-all">
                     {t("common.getStarted")}
                   </Link>
                 </>

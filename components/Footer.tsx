@@ -17,7 +17,7 @@ const Footer = () => {
             <Link href="/" className="flex items-center space-x-2">
               <div className="relative w-12 h-12 flex items-center justify-center bg-white rounded-lg p-1">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt="Equator Bridges Logo" className="w-full h-full object-contain" />
+                <img src="/logo.jpeg" alt="Equator Bridges Logo" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold text-xl tracking-tight text-white uppercase">
                 EQUATOR BRIDGES
@@ -47,10 +47,10 @@ const Footer = () => {
             <h3 className="text-white font-bold text-lg uppercase tracking-wider">{t("footer.quick_links")}</h3>
             <ul className="space-y-3">
               <li><Link href="/about" className="hover:text-primary-400 transition-colors">{t("common.about")}</Link></li>
-              <li><Link href="/services/medical-tourism" className="hover:text-primary-400 transition-colors">Medical Tourism</Link></li>
-              <li><Link href="/services/education-consultancy" className="hover:text-primary-400 transition-colors">Education Consultancy</Link></li>
-              <li><Link href="/services/medical-training" className="hover:text-primary-400 transition-colors">Medical Training</Link></li>
-              <li><Link href="/services/technical-training" className="hover:text-primary-400 transition-colors">Technical Training</Link></li>
+              <li><Link href="/services/medical-tourism" className="hover:text-primary-400 transition-colors">{t("common.medicalTourism")}</Link></li>
+              <li><Link href="/services/education-consultancy" className="hover:text-primary-400 transition-colors">{t("common.eduConsultancy")}</Link></li>
+              <li><Link href="/services/medical-training" className="hover:text-primary-400 transition-colors">{t("common.medicalTraining")}</Link></li>
+              <li><Link href="/services/technical-training" className="hover:text-primary-400 transition-colors">{t("common.techTraining")}</Link></li>
               <li><Link href="/cargo" className="hover:text-primary-400 transition-colors">{t("common.cargo")}</Link></li>
               <li><Link href="/countries" className="hover:text-primary-400 transition-colors">{t("common.countries")}</Link></li>
               <li><Link href="/contact" className="hover:text-primary-400 transition-colors">{t("common.contact")}</Link></li>
@@ -61,10 +61,10 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="text-white font-bold text-lg uppercase tracking-wider">{t("footer.policies")}</h3>
             <ul className="space-y-3">
-              <li><Link href="#" className="hover:text-primary-400 transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="hover:text-primary-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-primary-400 transition-colors">Refund Policy</Link></li>
-              <li><Link href="#" className="hover:text-primary-400 transition-colors">Cookie Policy</Link></li>
+              <li><Link href="#" className="hover:text-primary-400 transition-colors">{t("common.terms")}</Link></li>
+              <li><Link href="#" className="hover:text-primary-400 transition-colors">{t("common.privacy")}</Link></li>
+              <li><Link href="#" className="hover:text-primary-400 transition-colors">{t("common.refund")}</Link></li>
+              <li><Link href="#" className="hover:text-primary-400 transition-colors">{t("common.cookie")}</Link></li>
             </ul>
           </div>
 

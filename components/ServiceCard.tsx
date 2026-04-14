@@ -1,18 +1,28 @@
+"use client";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslation } from "@/lib/i18n-context";
 
 interface ServiceCardProps {
   service: {
     id: string;
     title: string;
+    title_fr?: string;
+    title_pt?: string;
     slug: string;
     icon: any;
     description: string;
+    description_fr?: string;
+    description_pt?: string;
   };
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  const { locale, t } = useTranslation();
   const Icon = service.icon;
+
+  const title = locale === "en" ? service.title : (locale === "fr" ? (service.title_fr || service.title) : (service.title_pt || service.title));
+  const description = locale === "en" ? service.description : (locale === "fr" ? (service.description_fr || service.description) : (service.description_pt || service.description));
 
   return (
     <div className="group relative bg-slate-900/40 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-10 transition-all duration-700 hover:bg-slate-900/60 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)] hover:border-primary-500/50 overflow-hidden flex flex-col justify-between h-full">
@@ -25,11 +35,11 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </div>
         
         <h3 className="text-3xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary-400 transition-colors leading-none">
-          {service.title}
+          {title}
         </h3>
         
         <p className="text-slate-400 mb-10 leading-relaxed font-medium line-clamp-3 text-lg">
-          {service.description}
+          {description}
         </p>
         
         <Link 

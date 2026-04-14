@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
 import { Info, Target, Eye, MapPin, Mail, Phone, Clock, ShieldCheck, Globe } from "lucide-react";
+import { useTranslation } from "@/lib/i18n-context";
 
 export default function AboutPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="pt-24 pb-24 overflow-hidden">
       {/* Page Header */}
@@ -10,10 +14,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-6">
             <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1]">
-              About Who <span className="text-primary-600">We Are</span>
+              {t("about.header_title").split("Are")[0]} <span className="text-primary-600">{t("about.header_title").includes("Are") ? "Are" : ""}</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-semibold">
-              Your trusted partner in navigating the cross-continental landscape of opportunities between Africa and Asia.
+              {t("about.header_subtitle")}
             </p>
           </div>
         </div>
@@ -27,9 +31,9 @@ export default function AboutPage() {
               <div className="w-20 h-20 bg-primary-100 rounded-2xl flex items-center justify-center text-primary-600 mb-8 group-hover:bg-primary-600 group-hover:text-white transition-all transform hover:rotate-3">
                 <Target className="w-10 h-10" />
               </div>
-              <h2 className="text-3xl font-black text-slate-900 mb-6 group-hover:text-primary-700">Our Mission</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-6 group-hover:text-primary-700">{t("about.mission_title")}</h2>
               <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                To simplify and facilitate seamless international transitions for Africans through specialized, high-integrity services in medical care, world-class education, and expanding business horizons.
+                {t("about.mission_desc")}
               </p>
             </div>
             
@@ -37,9 +41,9 @@ export default function AboutPage() {
                <div className="w-20 h-20 bg-secondary-100 rounded-2xl flex items-center justify-center text-secondary-600 mb-8 group-hover:bg-secondary-600 group-hover:text-white transition-all transform hover:-rotate-3">
                   <Eye className="w-10 h-10" />
                </div>
-               <h2 className="text-3xl font-black text-slate-900 mb-6 group-hover:text-secondary-700">Our Vision</h2>
+               <h2 className="text-3xl font-black text-slate-900 mb-6 group-hover:text-secondary-700">{t("about.vision_title")}</h2>
                <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                  To become the leading global gateway that fosters life-changing connections between African nations and Asian expertise, delivering excellence with every interaction.
+                  {t("about.vision_desc")}
                </p>
             </div>
           </div>
@@ -52,27 +56,27 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                <div className="space-y-10">
                   <div className="inline-flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
-                     <span className="text-sm font-black uppercase tracking-widest text-primary-400">Our Reputation</span>
+                     <span className="text-sm font-black uppercase tracking-widest text-primary-400">{t("about.reputation_badge")}</span>
                   </div>
                   <h2 className="text-4xl md:text-5xl font-black leading-tight">
-                     Pioneering Excellence in Cross-Regional Partnership
+                     {t("about.reputation_title")}
                   </h2>
                   <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium">
-                     Equator Bridges Partners OPC Pvt Ltd operates with a deep commitment to professionalism and transparency. We understand the unique challenges of international travel and relocation.
+                     {t("about.reputation_subtitle")}
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
                      <div className="flex items-start space-x-4">
                         <ShieldCheck className="w-8 h-8 text-secondary-400" />
                         <div>
-                           <p className="text-xl font-bold">100% Verified</p>
-                           <p className="text-slate-500 font-medium">Accredited international partners</p>
+                           <p className="text-xl font-bold">{t("about.verified_title")}</p>
+                           <p className="text-slate-500 font-medium">{t("about.verified_desc")}</p>
                         </div>
                      </div>
                      <div className="flex items-start space-x-4">
                         <Globe className="w-8 h-8 text-primary-400" />
                         <div>
-                           <p className="text-xl font-bold">Pan-Asian Reach</p>
-                           <p className="text-slate-500 font-medium">Regional offices across India & UAE</p>
+                           <p className="text-xl font-bold">{t("about.reach_title")}</p>
+                           <p className="text-slate-500 font-medium">{t("about.reach_desc")}</p>
                         </div>
                      </div>
                   </div>
@@ -81,10 +85,10 @@ export default function AboutPage() {
                    <div className="bg-gradient-to-br from-primary-600 to-secondary-600 h-[500px] w-full rounded-2xl p-1 shadow-2xl skew-x-3 transition-transform hover:skew-x-0">
                       <div className="bg-slate-900 w-full h-full rounded-2xl flex items-center justify-center text-center p-12">
                          <div>
-                            <p className="text-6xl font-black mb-6">OPC</p>
-                            <p className="text-2xl font-bold text-slate-400 uppercase tracking-widest">ONE PERSON COMPANY</p>
+                            <p className="text-6xl font-black mb-6">{t("about.opc_title")}</p>
+                            <p className="text-2xl font-bold text-slate-400 uppercase tracking-widest">{t("about.opc_subtitle")}</p>
                             <div className="mt-12 pt-12 border-t border-slate-800">
-                               <p className="text-lg font-medium opacity-80">Registered under the Ministry of Corporate Affairs (MCA), India.</p>
+                               <p className="text-lg font-medium opacity-80">{t("about.opc_detail")}</p>
                             </div>
                          </div>
                       </div>
@@ -98,8 +102,8 @@ export default function AboutPage() {
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-16">
-              <h2 className="section-title">Visit Our Global Headquarters</h2>
-              <p className="section-subtitle">A strategic hub located in Greater Noida, India, connecting our regional offices and diverse service centers.</p>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight">{t("about.visit_title")}</h2>
+              <p className="text-lg text-slate-600 leading-relaxed font-medium mt-4">{t("about.visit_subtitle")}</p>
            </div>
            
            <div className="bg-slate-50 border border-slate-100 rounded-[3rem] p-12 md:p-20 shadow-xl flex flex-col md:flex-row gap-16 items-center">
@@ -109,7 +113,7 @@ export default function AboutPage() {
                        <MapPin className="w-8 h-8" />
                     </div>
                     <div>
-                       <h3 className="text-2xl font-black text-slate-900 mb-2">Office Address</h3>
+                       <h3 className="text-2xl font-black text-slate-900 mb-2">{t("about.address_title")}</h3>
                        <p className="text-xl font-medium text-slate-600 leading-relaxed">Office 318, AOK Tower, Paramount Golf Forest, Greater Noida, India</p>
                     </div>
                  </div>
@@ -119,7 +123,7 @@ export default function AboutPage() {
                        <Mail className="w-8 h-8" />
                     </div>
                     <div>
-                       <h3 className="text-2xl font-black text-slate-900 mb-2">Email Support</h3>
+                       <h3 className="text-2xl font-black text-slate-900 mb-2">{t("about.email_title")}</h3>
                        <p className="text-xl font-medium text-slate-600 transition-colors hover:text-primary-600 break-all">diambakaglobalhospitalityservi@gmail.com</p>
                     </div>
                  </div>
@@ -129,9 +133,9 @@ export default function AboutPage() {
                        <Phone className="w-8 h-8" />
                     </div>
                     <div>
-                       <h3 className="text-2xl font-black text-slate-900 mb-2">WhatsApp / Phone</h3>
+                       <h3 className="text-2xl font-black text-slate-900 mb-2">{t("about.phone_title")}</h3>
                        <p className="text-xl font-medium text-slate-600">+91 7982408940</p>
-                       <p className="text-sm text-slate-400 mt-2 font-black uppercase tracking-wider">Available 24/7 for urgent consultations</p>
+                       <p className="text-sm text-slate-400 mt-2 font-black uppercase tracking-wider">{t("about.phone_support")}</p>
                     </div>
                  </div>
               </div>

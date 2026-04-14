@@ -38,21 +38,21 @@ const Hero = ({ carouselImages = [] }: { carouselImages?: { url: string, descrip
       {/* Decorative Background fallback */}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-10 animate-in slide-in-from-left duration-700">
+        <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[250px] md:auto-rows-[300px] gap-4 md:gap-6">
+          <div className="space-y-6 md:space-y-10 animate-in slide-in-from-left duration-700">
             <div className="inline-flex items-center space-x-3 bg-slate-800/80 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 shadow-sm">
               <span className="flex h-2 w-2 rounded-full bg-primary-500 animate-pulse" />
-              <span className="text-sm font-black uppercase tracking-[0.2em] text-slate-300 italic">
+              <span className="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-slate-300 italic">
                 {t("hero.badge")}
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[0.95] tracking-tighter uppercase italic">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] md:leading-[0.95] tracking-tighter uppercase italic">
               {t("hero.title")} <br />
               <span className="text-primary-500 not-italic font-extrabold">{t("hero.title_highlight")}</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-slate-300 leading-relaxed font-medium max-w-xl italic border-l-4 border-primary-500 pl-8">
+            <p className="text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed font-medium max-w-xl italic border-l-4 border-primary-500 pl-6 md:pl-8">
               {t("hero.description")}
             </p>
             

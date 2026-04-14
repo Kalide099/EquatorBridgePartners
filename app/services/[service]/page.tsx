@@ -1,7 +1,6 @@
+"use client";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import fs from "fs";
-import path from "path";
 import * as LucideIcons from "lucide-react";
 import { 
   CheckCircle2, 
@@ -14,25 +13,19 @@ import {
   ShieldCheck,
   CalendarDays
 } from "lucide-react";
+import { useTranslation } from "@/lib/i18n-context";
+import { useState, useEffect } from "react";
 
+// Client-side mapping for static generation params if needed, but here we use dynamic fetching
 function getDynamicServices() {
-  const servicesPath = path.join(process.cwd(), "lib", "servicesData.json");
-  if (!fs.existsSync(servicesPath)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(servicesPath, "utf-8"));
-  } catch (e) {
-    return [];
-  }
-}
-
-export function generateStaticParams() {
-  const dynamicServices = getDynamicServices();
-  return dynamicServices.map((s: any) => ({
-    service: s.slug,
-  }));
+  // In a real app, this would be a server-side fetch, but since we're in a "use client" component,
+  // we'll fetch from the public API or just use the local import if possible.
+  // For this fix, I'll use a standard approach.
+  return require("@/lib/servicesData.json");
 }
 
 export default function ServicePage({ params }: { params: { service: string } }) {
+  const { t, locale } = useTranslation();
   const dynamicServices = getDynamicServices();
   const service = dynamicServices.find((s: any) => s.slug === params.service);
 
@@ -42,6 +35,10 @@ export default function ServicePage({ params }: { params: { service: string } })
 
   const IconWrapper = (LucideIcons as any)[service.iconType] || LucideIcons.Globe;
   const Icon = ({ className }: { className?: string }) => <IconWrapper className={className} />;
+
+  // Multi-language content selection
+  const title = locale === "en" ? service.title : (locale === "fr" ? (service.title_fr || service.title) : (service.title_pt || service.title));
+  const fullDescription = locale === "en" ? service.fullDescription : (locale === "fr" ? (service.fullDescription_fr || service.fullDescription) : (service.fullDescription_pt || service.fullDescription));
 
   return (
     <div className="pt-24 overflow-hidden">
@@ -53,19 +50,19 @@ export default function ServicePage({ params }: { params: { service: string } })
              <div className="space-y-8 animate-in slide-in-from-left duration-700">
                 <div className="inline-flex items-center space-x-2 bg-primary-600/30 px-4 py-2 rounded-full border border-primary-500/50">
                    <Icon className="w-5 h-5 text-primary-400" />
-                   <span className="text-sm font-black uppercase tracking-widest text-primary-300">Our Services</span>
+                   <span className="text-sm font-black uppercase tracking-widest text-primary-300">{t("service_detail.our_services")}</span>
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black leading-tight">{service.title}</h1>
+                <h1 className="text-5xl md:text-7xl font-black leading-tight uppercase italic">{title}</h1>
                 <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium">
-                   {service.fullDescription}
+                   {fullDescription}
                 </p>
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                    <Link href="/contact" className="btn-primary w-full sm:w-auto text-lg py-4 px-10 shadow-2xl shadow-primary-500/20">
-                      Get Free Consultation
+                      {t("service_detail.cta_consult")}
                    </Link>
                    <Link href="/login" className="px-10 py-4 border-2 border-white/10 rounded-xl font-bold hover:bg-white/5 transition-all w-full sm:w-auto text-center flex items-center justify-center">
                       <Zap className="w-5 h-5 mr-3 text-secondary-500" />
-                      Apply Now
+                      {t("service_detail.cta_apply")}
                    </Link>
                 </div>
              </div>
@@ -92,17 +89,17 @@ export default function ServicePage({ params }: { params: { service: string } })
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-20">
-              <h2 className="section-title">How It Works</h2>
-              <p className="section-subtitle">Simplified steps to guide you through your journey with Equator Bridges Partners.</p>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight">{t("service_detail.how_it_works")}</h2>
+              <p className="text-lg text-slate-600 leading-relaxed font-medium mt-4">{t("service_detail.how_it_works_subtitle")}</p>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
               <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-100 -z-0 hidden md:block" />
               {[
-                { title: "Consultation", desc: "Speak with our expert regional managers about your needs." },
-                { title: "Application", desc: "Submit your required documentation for initial profile review." },
-                { title: "Coordination", desc: "We facilitate all bookings, visas, and logistic arrangements." },
-                { title: "Execution", desc: "Success! Complete your journey with our on-ground support." }
+                { title: t("service_detail.steps.step1_title"), desc: t("service_detail.steps.step1_desc") },
+                { title: t("service_detail.steps.step2_title"), desc: t("service_detail.steps.step2_desc") },
+                { title: t("service_detail.steps.step3_title"), desc: t("service_detail.steps.step3_desc") },
+                { title: t("service_detail.steps.step4_title"), desc: t("service_detail.steps.step4_desc") }
               ].map((step, idx) => (
                 <div key={idx} className="relative z-10 bg-white p-8 rounded-2xl border border-slate-100 shadow-xl group hover:border-primary-600 transition-all">
                    <div className="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-xl font-black mb-6 group-hover:bg-primary-600 transition-colors">
@@ -124,7 +121,7 @@ export default function ServicePage({ params }: { params: { service: string } })
               <div className="space-y-12">
                  <div className="flex items-center space-x-4">
                     <MapPin className="w-10 h-10 text-primary-600" />
-                    <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Core Features</h2>
+                    <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">{t("service_detail.core_features")}</h2>
                  </div>
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {service.features.map((feature: string, idx: number) => (
@@ -140,15 +137,15 @@ export default function ServicePage({ params }: { params: { service: string } })
               <div className="space-y-12">
                  <div className="flex items-center space-x-4">
                     <FileText className="w-10 h-10 text-primary-600" />
-                    <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Required Documents</h2>
+                    <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">{t("service_detail.required_docs")}</h2>
                  </div>
                  <div className="bg-white p-8 rounded-3xl border-2 border-slate-100 space-y-4">
                     {[
-                      "Copy of Passport (Valid for min 6 months)",
-                      "Relevant Application Forms (provided by us)",
-                      "Proof of Funding / Financials",
-                      "Previous Academic Transcripts (for Education)",
-                      "Medical History / Referral Letters (for Medical Tourism)"
+                      t("service_detail.docs.passport"),
+                      t("service_detail.docs.forms"),
+                      t("service_detail.docs.funding"),
+                      t("service_detail.docs.transcripts"),
+                      t("service_detail.docs.history")
                     ].map((doc, idx) => (
                        <div key={idx} className="flex items-start space-x-4 border-b border-slate-50 last:border-0 pb-4 last:pb-0">
                           <div className="w-8 h-8 rounded bg-primary-100 flex items-center justify-center flex-shrink-0">
@@ -167,9 +164,9 @@ export default function ServicePage({ params }: { params: { service: string } })
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-20 space-y-6">
-              <h2 className="section-title uppercase tracking-tighter text-6xl opacity-10 absolute -top-10 left-0 right-0 -z-0">Packages</h2>
-              <h2 className="section-title relative z-10">Tailored Service Packages</h2>
-              <p className="section-subtitle relative z-10">Select the package that fits your specific needs and timeline.</p>
+              <h2 className="section-title uppercase tracking-tighter text-6xl opacity-10 absolute -top-10 left-0 right-0 -z-0">{t("service_detail.packages_badge")}</h2>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight relative z-10">{t("service_detail.packages_title")}</h2>
+              <p className="text-lg text-slate-600 leading-relaxed font-medium relative z-10">{t("service_detail.packages_subtitle")}</p>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -195,14 +192,14 @@ export default function ServicePage({ params }: { params: { service: string } })
                     </ul>
                  </div>
                  <Link href={`/payment?service=${service.slug}&package=basic`} className="mt-12 py-5 bg-slate-900 text-white w-full rounded-2xl font-black text-center text-xl hover:bg-slate-800 transition-all flex items-center justify-center group-hover:bg-primary-600">
-                    Select Standard
+                    {t("service_detail.select_standard")}
                     <CreditCard className="w-6 h-6 ml-3" />
                  </Link>
               </div>
 
               {/* Premium Package */}
               <div className="glass-card flex flex-col justify-between border-4 border-primary-600/20 shadow-2xl shadow-primary-200/50 p-12 bg-slate-900 text-white relative overflow-hidden group transition-all transform hover:-translate-y-2">
-                 <div className="absolute -top-4 -right-10 bg-primary-600 text-white px-20 py-8 rotate-45 font-black uppercase tracking-widest text-xs z-10 shadow-2xl">Premium Choice</div>
+                 <div className="absolute -top-4 -right-10 bg-primary-600 text-white px-20 py-8 rotate-45 font-black uppercase tracking-widest text-xs z-10 shadow-2xl">{t("service_detail.premium_choice")}</div>
                  <div className="relative z-10">
                     <div className="flex justify-between items-start mb-10">
                        <div>
@@ -223,7 +220,7 @@ export default function ServicePage({ params }: { params: { service: string } })
                     </ul>
                  </div>
                  <Link href={`/payment?service=${service.slug}&package=premium`} className="mt-12 py-5 bg-primary-600 text-white w-full rounded-2xl font-black text-center text-xl hover:bg-primary-700 transition-all flex items-center justify-center relative z-10 shadow-2xl shadow-primary-900/50">
-                    Proceed to VIP Payment
+                    {t("service_detail.proceed_vip")}
                     <ArrowRight className="w-6 h-6 ml-3" />
                  </Link>
               </div>
@@ -235,8 +232,8 @@ export default function ServicePage({ params }: { params: { service: string } })
       <section className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-16">
-              <h2 className="section-title">Common Questions</h2>
-              <p className="section-subtitle">Find answers to the most frequent inquiries about our {service.title} services.</p>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight">{t("service_detail.common_questions")}</h2>
+              <p className="text-lg text-slate-600 leading-relaxed font-medium mt-4">{t("service_detail.faq_subtitle")}</p>
            </div>
            
            <div className="space-y-6">

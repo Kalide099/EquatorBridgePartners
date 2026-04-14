@@ -3,8 +3,10 @@ import { Mail, Phone, MapPin, MessageSquare, Send, Globe, ArrowRight, Zap, Star,
 import Link from "next/link";
 import { useState } from "react";
 import { submitContact } from "@/app/actions/contact";
+import { useTranslation } from "@/lib/i18n-context";
 
 export default function ContactPage() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -27,9 +29,11 @@ export default function ContactPage() {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-600/10 skew-x-12 opacity-50" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-8 animate-in slide-in-from-left duration-700">
-            <h1 className="text-6xl md:text-8xl font-black leading-tight uppercase tracking-tighter">Get In <span className="text-primary-500 font-extrabold italic tracking-tight">Touch</span></h1>
+            <h1 className="text-6xl md:text-8xl font-black leading-tight uppercase tracking-tighter">
+              {t("contact_page.hero_title")} <span className="text-primary-500 font-extrabold italic tracking-tight">{t("contact_page.hero_title_highlight")}</span>
+            </h1>
             <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-semibold">
-               Have questions? Our experts are here to help you bridge the gap between continents. Start the conversation today.
+               {t("contact_page.hero_subtitle")}
             </p>
           </div>
         </div>
@@ -50,30 +54,30 @@ export default function ContactPage() {
                        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600">
                           <CheckCircle className="w-12 h-12" />
                        </div>
-                       <h3 className="text-3xl font-black text-slate-900">Message Sent!</h3>
-                       <p className="text-slate-600 font-medium text-lg leading-relaxed">Thank you for Reaching out. Our global experts will contact you within 24 hours.</p>
-                       <button onClick={() => setSuccess(false)} className="mt-8 px-8 py-3 bg-slate-100 font-bold text-slate-600 hover:bg-slate-200 rounded-xl transition-colors">Send Another</button>
+                       <h3 className="text-3xl font-black text-slate-900">{t("contact_page.form_success_title")}</h3>
+                       <p className="text-slate-600 font-medium text-lg leading-relaxed">{t("contact_page.form_success_desc")}</p>
+                       <button onClick={() => setSuccess(false)} className="mt-8 px-8 py-3 bg-slate-100 font-bold text-slate-600 hover:bg-slate-200 rounded-xl transition-colors">{t("contact_page.form_btn_another")}</button>
                     </div>
                  ) : (
                     <form onSubmit={handleSubmit} className="space-y-8 relative z-0 mt-8">
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                           <div className="space-y-3">
-                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">Full Name</label>
+                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">{t("contact_page.label_name")}</label>
                              <input 
                                type="text" 
                                name="name"
                                required
-                               placeholder="John Doe" 
+                               placeholder={t("contact_page.placeholder_name")} 
                                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-primary-600 outline-none transition-all font-medium text-slate-700"
                              />
                           </div>
                           <div className="space-y-3">
-                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">Email Address</label>
+                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">{t("contact_page.label_email")}</label>
                              <input 
                                type="email" 
                                name="email"
                                required
-                               placeholder="john@example.com" 
+                               placeholder={t("contact_page.placeholder_email")} 
                                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-primary-600 outline-none transition-all font-medium text-slate-700"
                              />
                           </div>
@@ -81,16 +85,16 @@ export default function ContactPage() {
                        
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                           <div className="space-y-3">
-                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">Phone Number</label>
+                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">{t("contact_page.label_phone")}</label>
                              <input 
                                type="tel" 
                                name="phone"
-                               placeholder="+123 456 7890" 
+                               placeholder={t("contact_page.placeholder_phone")} 
                                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-primary-600 outline-none transition-all font-medium text-slate-700"
                              />
                           </div>
                           <div className="space-y-3">
-                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">Select Service</label>
+                             <label className="text-slate-900 font-black uppercase tracking-widest text-xs">{t("contact_page.label_service")}</label>
                              <select name="service" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-primary-600 outline-none transition-all font-medium text-slate-700">
                                 <option value="General Inquiry">General Inquiry</option>
                                 <option value="Medical Tourism">Medical Tourism</option>
@@ -102,18 +106,18 @@ export default function ContactPage() {
                        </div>
 
                        <div className="space-y-3">
-                          <label className="text-slate-900 font-black uppercase tracking-widest text-xs">Your Message</label>
+                          <label className="text-slate-900 font-black uppercase tracking-widest text-xs">{t("contact_page.label_message")}</label>
                           <textarea 
                             name="message"
                             required
                             rows={5} 
-                            placeholder="How can we help you today?" 
+                            placeholder={t("contact_page.placeholder_message")} 
                             className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-primary-600 outline-none transition-all font-medium text-slate-700"
                           ></textarea>
                        </div>
 
                        <button disabled={loading} className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-xl hover:bg-primary-600 transition-all shadow-xl hover:shadow-primary-100 transform active:scale-95 flex items-center justify-center disabled:opacity-50">
-                          {loading ? "Sending..." : "Send Message"}
+                          {loading ? t("contact_page.btn_sending") : t("contact_page.btn_send")}
                           {!loading && <ArrowRight className="w-6 h-6 ml-3" />}
                        </button>
                     </form>
@@ -123,8 +127,8 @@ export default function ContactPage() {
               {/* Info Side */}
               <div className="space-y-16">
                  <div className="space-y-10">
-                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">Visit Our Strategic Headquarters</h2>
-                    <p className="text-xl text-slate-600 leading-relaxed font-medium">Located in India&apos;s leading industrial and educational hub, we coordinate our pan-African network from Greater Noida.</p>
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">{t("contact_page.visit_title")}</h2>
+                    <p className="text-xl text-slate-600 leading-relaxed font-medium">{t("contact_page.visit_subtitle")}</p>
                  </div>
 
                  <div className="space-y-10">
@@ -133,7 +137,7 @@ export default function ContactPage() {
                           <MapPin className="w-8 h-8" />
                        </div>
                        <div>
-                          <h4 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-wide">Main Office</h4>
+                          <h4 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-wide">{t("contact_page.office_title")}</h4>
                           <p className="text-lg text-slate-600 font-medium">Office 318, AOK Tower, Paramount Golf Forest, Greater Noida, India</p>
                        </div>
                     </div>
@@ -143,7 +147,7 @@ export default function ContactPage() {
                           <Mail className="w-8 h-8" />
                        </div>
                        <div>
-                          <h4 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-wide">Email Enquiries</h4>
+                          <h4 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-wide">{t("contact_page.email_title")}</h4>
                           <p className="text-lg text-slate-600 font-medium break-all">diambakaglobalhospitalityservi@gmail.com</p>
                        </div>
                     </div>
@@ -158,7 +162,7 @@ export default function ContactPage() {
                                 <MessageSquare className="w-8 h-8" />
                              </div>
                              <div>
-                                <h4 className="text-2xl font-black mb-1 uppercase tracking-wider">WhatsApp Us</h4>
+                                <h4 className="text-2xl font-black mb-1 uppercase tracking-wider">{t("contact_page.whatsapp_title")}</h4>
                                 <p className="text-lg font-medium opacity-90 text-white/80">+91 7982408940</p>
                              </div>
                           </div>
@@ -172,7 +176,7 @@ export default function ContactPage() {
                        <div className="flex text-yellow-500">
                           {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-current" />)}
                        </div>
-                       <span className="font-bold text-slate-700 text-sm italic">Trusted by 10k+ clients worldwide</span>
+                       <span className="font-bold text-slate-700 text-sm italic">{t("contact_page.trusted_badge")}</span>
                     </div>
                  </div>
               </div>
@@ -186,8 +190,8 @@ export default function ContactPage() {
            <div className="h-[500px] w-full bg-slate-100 rounded-[3rem] shadow-2xl border-8 border-white overflow-hidden flex items-center justify-center relative">
               <div className="text-center space-y-4">
                  <Globe className="w-20 h-20 text-slate-300 mx-auto animate-spin-slow" />
-                 <p className="text-xl font-black text-slate-400 uppercase tracking-widest">Interactive Regional Map Loading...</p>
-                 <Link href="#" className="inline-block py-3 px-10 bg-slate-900 text-white rounded-xl font-bold hover:bg-primary-600 transition-all shadow-2xl">Open in Google Maps</Link>
+                 <p className="text-xl font-black text-slate-400 uppercase tracking-widest">{t("contact_page.map_loading")}</p>
+                 <Link href="#" className="inline-block py-3 px-10 bg-slate-900 text-white rounded-xl font-bold hover:bg-primary-600 transition-all shadow-2xl">{t("contact_page.map_btn")}</Link>
               </div>
            </div>
         </div>

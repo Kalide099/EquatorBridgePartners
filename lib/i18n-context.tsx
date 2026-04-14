@@ -17,12 +17,19 @@ const translations: Record<Locale, any> = { en, fr, pt };
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
-export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+export function I18nProvider({ 
+  children, 
+  defaultValue = "en" 
+}: { 
+  children: React.ReactNode;
+  defaultValue?: string;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(defaultValue as Locale);
 
   useEffect(() => {
+    // Only run on client
     const saved = localStorage.getItem("locale") as Locale;
-    if (saved && (saved === "en" || saved === "fr" || saved === "pt")) {
+    if (saved && ["en", "fr", "pt"].includes(saved)) {
       setLocaleState(saved);
     }
   }, []);
@@ -30,7 +37,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const setLocale = (l: Locale) => {
     setLocaleState(l);
     localStorage.setItem("locale", l);
-    document.cookie = `locale=${l}; path=/; max-age=31536000`;
+    // Use NEXT_LOCALE to match standard Next.js patterns and what we use in layout
+    document.cookie = `NEXT_LOCALE=${l}; path=/; max-age=31536000`;
   };
 
   const t = (path: string) => {

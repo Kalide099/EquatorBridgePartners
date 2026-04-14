@@ -72,7 +72,7 @@ const WhyChooseUs = () => {
                    
                    <div className="relative z-10">
                       <h4 className="text-6xl md:text-7xl font-black mb-4 tracking-tighter drop-shadow-xl text-primary-400">15k<span className="text-white">+</span></h4>
-                      <p className="text-lg md:text-xl font-bold opacity-80 uppercase tracking-widest text-slate-300">Clients Successfully Facilitated Since Incorporation</p>
+                      <p className="text-lg md:text-xl font-bold opacity-80 uppercase tracking-widest text-slate-300">{t("whyUs.stat_desc")}</p>
                       <div className="mt-10 flex justify-center space-x-3">
                          {[1,2,3,4,5].map(i => <div key={i} className="w-3 h-3 bg-white/20 rounded-full" />)}
                       </div>
