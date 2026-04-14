@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ServicesSection from "@/components/ServicesSection";
 import ServiceCard from "@/components/ServiceCard";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CountriesSection from "@/components/CountriesSection";
@@ -37,8 +38,6 @@ export default async function Home() {
     <div className="overflow-hidden">
       <Hero carouselImages={carouselImages} />
       
-import ServicesSection from "@/components/ServicesSection";
-// ... in Home component ...
       <ServicesSection mappedServices={mappedServices} />
 
       <WhyChooseUs />
