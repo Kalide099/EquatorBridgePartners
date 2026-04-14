@@ -15,8 +15,7 @@ export default async function Home() {
   const testimonialsData = await getTestimonials();
   
   const mappedServices = dynamicServices.map((s: any) => ({
-    ...s,
-    icon: (LucideIcons as any)[s.iconType] || LucideIcons.Globe
+    ...s
   }));
 
   const hardcodedMap: Record<string, string> = {

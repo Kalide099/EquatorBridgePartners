@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import * as LucideIcons from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslation } from "@/lib/i18n-context";
 
@@ -10,7 +11,7 @@ interface ServiceCardProps {
     title_fr?: string;
     title_pt?: string;
     slug: string;
-    icon: any;
+    iconType: string;
     description: string;
     description_fr?: string;
     description_pt?: string;
@@ -19,7 +20,9 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
   const { locale, t } = useTranslation();
-  const Icon = service.icon;
+  
+  const IconWrapper = (LucideIcons as any)[service.iconType] || LucideIcons.Globe;
+  const Icon = ({ className }: { className?: string }) => <IconWrapper className={className} />;
 
   const title = locale === "en" ? service.title : (locale === "fr" ? (service.title_fr || service.title) : (service.title_pt || service.title));
   const description = locale === "en" ? service.description : (locale === "fr" ? (service.description_fr || service.description) : (service.description_pt || service.description));
