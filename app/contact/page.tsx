@@ -152,9 +152,11 @@ export default function ContactPage() {
                        </div>
                     </div>
 
-                    <div className="flex items-start space-x-8">
-                       <Link 
+                     <div className="flex items-start space-x-8">
+                       <a 
                          href="https://wa.me/917982408940" 
+                         target="_blank"
+                         rel="noopener noreferrer"
                          className="w-full p-8 bg-green-500 rounded-3xl text-white flex items-center justify-between hover:bg-green-600 transition-all shadow-xl shadow-green-100 transform hover:scale-[1.02] flex-shrink-0"
                        >
                           <div className="flex items-center space-x-6">
@@ -167,7 +169,7 @@ export default function ContactPage() {
                              </div>
                           </div>
                           <Zap className="w-8 h-8 text-white animate-pulse" />
-                       </Link>
+                       </a>
                     </div>
                  </div>
 

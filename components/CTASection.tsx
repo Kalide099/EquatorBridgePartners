@@ -39,15 +39,17 @@ const CTASection = () => {
                    {t("cta_section.btn_start")}
                    <ArrowRight className="w-6 h-6 ml-3" />
                 </Link>
-                <Link 
+                <a 
                   href="https://wa.me/917982408940" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-10 py-5 bg-primary-600/20 backdrop-blur-xl border border-primary-500/50 text-white rounded-2xl font-black text-lg hover:bg-primary-600/40 transition-all flex items-center justify-center w-full sm:w-auto transform hover:scale-105 shadow-2xl shadow-primary-900/20"
                 >
                    <div className="w-10 h-10 bg-primary-500/20 rounded-full flex items-center justify-center mr-3 border border-primary-500/30">
                       <MessageSquare className="w-5 h-5 text-primary-400" />
                    </div>
                    {t("cta_section.btn_whatsapp")}
-                </Link>
+                </a>
              </div>
           </div>
         </div>

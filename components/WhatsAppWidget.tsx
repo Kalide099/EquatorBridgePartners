@@ -27,13 +27,14 @@ const WhatsAppWidget = () => {
       >
         <p className="font-bold text-sm mb-1 text-slate-900">Need Immediate Help?</p>
         <p className="text-xs text-slate-600 mb-3">Our global experts are available 24/7 on WhatsApp to assist you.</p>
-        <Link 
+        <a 
           href="https://wa.me/917982408940"
           target="_blank"
+          rel="noopener noreferrer"
           className="block text-center w-full bg-green-500 hover:bg-green-600 text-white text-xs font-black uppercase tracking-widest py-2 rounded-lg transition-colors"
         >
           Start Chat
-        </Link>
+        </a>
         <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white rotate-45 border-b border-r border-slate-100" />
       </div>
 
