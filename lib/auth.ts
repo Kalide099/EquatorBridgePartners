@@ -2,7 +2,10 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const secretKey = process.env.JWT_SECRET || "equator_bridges_premium_secret_2025";
+const secretKey = process.env.JWT_SECRET;
+if (!secretKey) {
+  throw new Error("JWT_SECRET is not set in environment variables");
+}
 const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
@@ -33,7 +36,7 @@ export async function login_user(user: { id: string, email: string, firstName: s
   cookies().set("session", session, { 
     expires, 
     httpOnly: true,
-    secure: false, // Set to false for compatibility during deployment tests
+    secure: process.env.NODE_ENV === "production", 
     sameSite: "lax",
     path: "/"
   });

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import fs from "fs";
 import path from "path";
+import { Service, Testimonial, GalleryItem } from "@prisma/client";
 
 /**
  * CMS utility to handle data fetching from Prisma with JSON fallback.
@@ -25,7 +26,7 @@ export async function getSeoSettings() {
 }
 
 export async function getServices() {
-  let dbServices = [];
+  let dbServices: Service[] = [];
   try {
     dbServices = await prisma.service.findMany({ orderBy: { createdAt: "desc" } });
   } catch (e) {
@@ -42,7 +43,7 @@ export async function getServices() {
 }
 
 export async function getTestimonials() {
-  let dbTestimonials = [];
+  let dbTestimonials: Testimonial[] = [];
   try {
     dbTestimonials = await prisma.testimonial.findMany({ orderBy: { createdAt: "desc" } });
   } catch (e) {
@@ -59,7 +60,7 @@ export async function getTestimonials() {
 }
 
 export async function getGalleryData() {
-  let dbItems = [];
+  let dbItems: GalleryItem[] = [];
   try {
     dbItems = await prisma.galleryItem.findMany({ orderBy: { createdAt: "desc" } });
   } catch (e) {
