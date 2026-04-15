@@ -15,7 +15,8 @@ export default async function UserManagementPage({
   
   const users = allUsers.filter(u => 
     !search || 
-    u.name?.toLowerCase().includes(search) || 
+    u.firstName?.toLowerCase().includes(search) || 
+    u.lastName?.toLowerCase().includes(search) || 
     u.email?.toLowerCase().includes(search)
   ).map(u => ({
     ...u,
