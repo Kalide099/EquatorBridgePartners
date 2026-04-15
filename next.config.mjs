@@ -7,6 +7,7 @@ const nextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
+      allowedOrigins: ['equatorbridges.com', 'www.equatorbridges.com', 'localhost:3000', '127.0.0.1:3000']
     },
   },
 };
