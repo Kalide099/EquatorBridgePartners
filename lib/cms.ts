@@ -88,3 +88,24 @@ export async function getLeads() {
     return [];
   }
 }
+
+export async function getUsers() {
+  try {
+    return await prisma.user.findMany({ orderBy: { createdAt: "desc" } });
+  } catch (e) {
+    console.warn("DB not ready? User query failed.");
+    return [];
+  }
+}
+
+export async function getPayments() {
+  try {
+    return await prisma.payment.findMany({ 
+      include: { user: true },
+      orderBy: { createdAt: "desc" } 
+    });
+  } catch (e) {
+    console.warn("DB not ready? Payment query failed.");
+    return [];
+  }
+}

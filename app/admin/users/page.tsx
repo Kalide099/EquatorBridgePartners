@@ -1,17 +1,29 @@
-"use client";
-import { useState } from "react";
-import { Users, Search, MoreVertical, ShieldCheck, ShieldAlert, Globe, ArrowRight, Zap, Mail, Phone, MapPin } from "lucide-react";
+import { Users, Search, MoreVertical, ShieldCheck, ShieldAlert, Globe, ArrowRight, Zap, Mail, Phone, MapPin, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { getUsers } from "@/lib/cms";
+import { deleteUser } from "@/app/actions/admin";
 
-export default function UserManagementPage() {
-  const [search, setSearch] = useState("");
-  const users = [
-    { id: "1", name: "John Doe", email: "john@example.com", role: "USER", status: "ACTIVE", country: "Nigeria", joined: "2025-05-10" },
-    { id: "2", name: "Marie Dubois", email: "marie@example.fr", role: "USER", status: "PENDING", country: "France", joined: "2025-06-12" },
-    { id: "3", name: "Admin X", email: "admin@equatorbridges.com", role: "ADMIN", status: "ACTIVE", country: "India", joined: "2024-01-01" },
-    { id: "4", name: "Sidi Mohamed", email: "sidi@mali.com", role: "USER", status: "BLOCKED", country: "Mali", joined: "2025-04-20" },
-    { id: "5", name: "Abebe Bikila", email: "abebe@ethio.com", role: "USER", status: "ACTIVE", country: "Ethiopia", joined: "2025-06-15" }
-  ];
+export const dynamic = "force-dynamic";
+
+export default async function UserManagementPage({
+  searchParams,
+}: {
+  searchParams: { search?: string };
+}) {
+  const search = searchParams?.search?.toLowerCase() || "";
+  const allUsers = await getUsers();
+  
+  const users = allUsers.filter(u => 
+    !search || 
+    u.name?.toLowerCase().includes(search) || 
+    u.email?.toLowerCase().includes(search)
+  ).map(u => ({
+    ...u,
+    // Add default values for UI if properties don't exist
+    name: u.firstName ? `${u.firstName} ${u.lastName || ''}`.trim() : 'Unknown',
+    country: 'Global', // Temporary until users have country field
+    joined: u.createdAt ? new Date(u.createdAt).toISOString().split('T')[0] : 'N/A'
+  }));
 
   return (
     <div className="min-h-screen bg-slate-50 pt-24 pb-24 overflow-hidden relative">
@@ -23,83 +35,90 @@ export default function UserManagementPage() {
              <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight uppercase">User <span className="text-primary-600 italic font-medium">Repository</span></h1>
              <p className="text-slate-500 font-extrabold uppercase tracking-widest text-xs mt-2 italic">Global Member Directory • Total Records: {users.length}</p>
           </div>
-          <div className="relative group w-full md:w-80">
+          <form action="/admin/users" method="GET" className="relative group w-full md:w-80 flex">
              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
              <input 
                type="text" 
-               placeholder="Search users by name, email, or country..." 
-               value={search}
-               onChange={(e) => setSearch(e.target.value)}
+               name="search"
+               defaultValue={searchParams?.search || ""}
+               placeholder="Search users by name, email..." 
                className="w-full pl-16 pr-6 py-4 bg-white border border-slate-100 rounded-2xl outline-none focus:ring-2 focus:ring-primary-600 transition-all font-medium text-slate-700 shadow-xl"
              />
-          </div>
+             <button type="submit" className="hidden">Search</button>
+          </form>
         </div>
 
         {/* User Table Card */}
         <div className="bg-white rounded-[3rem] p-4 lg:p-12 border border-slate-100 shadow-2xl shadow-slate-200/50 overflow-hidden relative group">
            <div className="absolute top-0 right-0 w-full h-full bg-primary-50/20 skew-x-12 -z-0 opacity-40 transition-all duration-700 hover:skew-x-0" />
            <div className="relative z-10 overflow-x-auto">
-              <table className="w-full text-left border-separate border-spacing-y-4">
-                 <thead>
-                    <tr className="uppercase text-[10px] font-black tracking-[0.2em] text-slate-400">
-                       <th className="px-8 pb-4">Member Profile</th>
-                       <th className="px-8 pb-4">Role / Node</th>
-                       <th className="px-8 pb-4">Region</th>
-                       <th className="px-8 pb-4">Status</th>
-                       <th className="px-8 pb-4 text-right">Operations</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    {users.map((user, idx) => (
-                       <tr key={idx} className="group/row bg-white hover:bg-slate-50 transition-all transform hover:-translate-y-1">
-                          <td className="px-8 py-6 rounded-l-[2rem] border-y border-l border-slate-50 group-hover/row:border-primary-100 shadow-sm relative overflow-hidden">
-                             <div className="absolute top-0 right-0 w-1 h-full bg-primary-600 opacity-0 group-hover/row:opacity-100 transition-opacity" />
-                             <div className="flex items-center space-x-6">
-                                <div className="w-14 h-14 bg-slate-900 border-4 border-white shadow-xl rounded-full flex items-center justify-center text-white font-black text-xl group-hover/row:bg-primary-600 transition-colors">
-                                   {user.name.split(" ").map(n => n[0]).join("")}
-                                </div>
-                                <div>
-                                   <p className="font-extrabold text-slate-900 group-hover/row:text-primary-600 transition-colors text-lg">{user.name}</p>
-                                   <div className="flex items-center space-x-4">
-                                      <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{user.email}</p>
-                                   </div>
-                                </div>
-                             </div>
-                          </td>
-                          <td className="px-8 py-6 border-y border-slate-50 group-hover/row:border-primary-100 bg-white/50 group-hover/row:bg-white shadow-sm">
-                             <div className="flex flex-col space-y-1">
-                                <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-slate-200 w-fit ${user.role === 'ADMIN' ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/50' : 'bg-slate-100 text-slate-500'}`}>
-                                   {user.role}
-                                </span>
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic ml-1">Joined: {user.joined}</span>
-                             </div>
-                          </td>
-                          <td className="px-8 py-6 border-y border-slate-50 group-hover/row:border-primary-100 bg-white shadow-sm">
-                             <div className="flex items-center space-x-3 text-slate-600 font-extrabold text-sm uppercase italic">
-                                <Globe className="w-4 h-4 text-primary-400 flex-shrink-0" />
-                                <span>{user.country}</span>
-                             </div>
-                          </td>
-                          <td className="px-8 py-6 border-y border-slate-50 group-hover/row:border-primary-100 bg-white/50 group-hover/row:bg-white shadow-sm">
-                             <div className="flex items-center space-x-2">
-                                <div className={`w-3 h-3 rounded-full animate-pulse ${user.status === 'ACTIVE' ? 'bg-green-500' : user.status === 'PENDING' ? 'bg-orange-500' : 'bg-red-500'}`} />
-                                <span className="font-black text-[10px] uppercase tracking-[0.2em] italic text-slate-400">{user.status}</span>
-                             </div>
-                          </td>
-                          <td className="px-8 py-6 rounded-r-[2rem] border-y border-r border-slate-50 group-hover/row:border-primary-100 shadow-sm text-right">
-                             <div className="flex justify-end items-center space-x-4 opacity-40 group-hover/row:opacity-100 transition-all transform group-hover/row:translate-x-0">
-                                <button className="p-3 bg-slate-900 text-white rounded-xl hover:bg-primary-600 transition-all shadow-xl transform active:scale-95 group/btn">
-                                   <MoreVertical className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
-                                </button>
-                                <button className="p-3 bg-primary-600 text-white rounded-xl hover:bg-slate-900 transition-all shadow-xl transform active:scale-95">
-                                   <Zap className="w-5 h-5 fill-current" />
-                                </button>
-                             </div>
-                          </td>
-                       </tr>
-                    ))}
-                 </tbody>
-              </table>
+              {users.length === 0 ? (
+                <p className="text-center text-slate-500 font-medium py-10">No users found.</p>
+              ) : (
+                <table className="w-full text-left border-separate border-spacing-y-4">
+                   <thead>
+                      <tr className="uppercase text-[10px] font-black tracking-[0.2em] text-slate-400">
+                         <th className="px-8 pb-4">Member Profile</th>
+                         <th className="px-8 pb-4">Role / Node</th>
+                         <th className="px-8 pb-4">Region</th>
+                         <th className="px-8 pb-4">Status</th>
+                         <th className="px-8 pb-4 text-right">Operations</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      {users.map((user, idx) => (
+                         <tr key={idx} className="group/row bg-white hover:bg-slate-50 transition-all transform hover:-translate-y-1">
+                            <td className="px-8 py-6 rounded-l-[2rem] border-y border-l border-slate-50 group-hover/row:border-primary-100 shadow-sm relative overflow-hidden">
+                               <div className="absolute top-0 right-0 w-1 h-full bg-primary-600 opacity-0 group-hover/row:opacity-100 transition-opacity" />
+                               <div className="flex items-center space-x-6">
+                                  <div className="w-14 h-14 bg-slate-900 border-4 border-white shadow-xl rounded-full flex items-center justify-center text-white font-black text-xl group-hover/row:bg-primary-600 transition-colors">
+                                     {user.name.split(" ").slice(0, 2).map((n: string) => n[0]).join("")}
+                                  </div>
+                                  <div>
+                                     <p className="font-extrabold text-slate-900 group-hover/row:text-primary-600 transition-colors text-lg">{user.name}</p>
+                                     <div className="flex items-center space-x-4">
+                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{user.email}</p>
+                                     </div>
+                                  </div>
+                               </div>
+                            </td>
+                            <td className="px-8 py-6 border-y border-slate-50 group-hover/row:border-primary-100 bg-white/50 group-hover/row:bg-white shadow-sm">
+                               <div className="flex flex-col space-y-1">
+                                  <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-slate-200 w-fit ${user.role === 'ADMIN' ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/50' : 'bg-slate-100 text-slate-500'}`}>
+                                     {user.role}
+                                  </span>
+                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic ml-1">Joined: {user.joined}</span>
+                               </div>
+                            </td>
+                            <td className="px-8 py-6 border-y border-slate-50 group-hover/row:border-primary-100 bg-white shadow-sm">
+                               <div className="flex items-center space-x-3 text-slate-600 font-extrabold text-sm uppercase italic">
+                                  <Globe className="w-4 h-4 text-primary-400 flex-shrink-0" />
+                                  <span>{user.country}</span>
+                               </div>
+                            </td>
+                            <td className="px-8 py-6 border-y border-slate-50 group-hover/row:border-primary-100 bg-white/50 group-hover/row:bg-white shadow-sm">
+                               <div className="flex items-center space-x-2">
+                                  <div className={`w-3 h-3 rounded-full animate-pulse ${user.status === 'ACTIVE' ? 'bg-green-500' : user.status === 'PENDING' ? 'bg-orange-500' : 'bg-red-500'}`} />
+                                  <span className="font-black text-[10px] uppercase tracking-[0.2em] italic text-slate-400">{user.status}</span>
+                               </div>
+                            </td>
+                            <td className="px-8 py-6 rounded-r-[2rem] border-y border-r border-slate-50 group-hover/row:border-primary-100 shadow-sm text-right">
+                               <div className="flex justify-end items-center space-x-4 opacity-40 group-hover/row:opacity-100 transition-all transform group-hover/row:translate-x-0">
+                                  <button className="p-3 bg-slate-900 text-white rounded-xl hover:bg-primary-600 transition-all shadow-xl transform active:scale-95 group/btn hidden">
+                                     <MoreVertical className="w-5 h-5 group-hover/btn:rotate-90 transition-transform" />
+                                  </button>
+                                  <form action={deleteUser.bind(null, user.id) as any}>
+                                      <button type="submit" className="p-3 bg-red-600 text-white rounded-xl hover:bg-slate-900 transition-all shadow-xl transform active:scale-95" title="Delete User">
+                                         <Trash2 className="w-5 h-5" />
+                                      </button>
+                                  </form>
+                               </div>
+                            </td>
+                         </tr>
+                      ))}
+                   </tbody>
+                </table>
+              )}
            </div>
         </div>
 

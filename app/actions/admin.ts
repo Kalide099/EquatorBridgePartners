@@ -44,6 +44,8 @@ export async function deleteGalleryPhoto(url: string) {
   try {
     await prisma.galleryItem.delete({ where: { url } });
     revalidatePath("/");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
   } catch (e) {
      return { error: "Delete failed" };
   }
@@ -113,8 +115,14 @@ export async function addTestimonial(formData: FormData) {
 }
 
 export async function deleteTestimonial(id: string) {
-  await prisma.testimonial.delete({ where: { id } });
-  revalidatePath("/");
+  try {
+    await prisma.testimonial.delete({ where: { id } });
+    revalidatePath("/");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (e) {
+     return { error: "Delete failed" };
+  }
 }
 
 export async function addService(formData: FormData) {
@@ -138,11 +146,44 @@ export async function addService(formData: FormData) {
 }
 
 export async function deleteService(id: string) {
-  await prisma.service.delete({ where: { id } });
-  revalidatePath("/");
+  try {
+    await prisma.service.delete({ where: { id } });
+    revalidatePath("/");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (e) {
+    return { error: "Delete failed" };
+  }
 }
 
 export async function deleteLead(id: string) {
-  await prisma.inquiry.delete({ where: { id } });
-  revalidatePath("/admin/dashboard");
+  try {
+    await prisma.inquiry.delete({ where: { id } });
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (e) {
+    return { error: "Delete failed" };
+  }
+}
+
+export async function deleteUser(id: string) {
+  try {
+    await prisma.user.delete({ where: { id } });
+    revalidatePath("/admin/users");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (e) {
+    return { error: "User deletion failed" };
+  }
+}
+
+export async function deletePayment(id: string) {
+  try {
+    await prisma.payment.delete({ where: { id } });
+    revalidatePath("/admin/payments");
+    revalidatePath("/admin/dashboard");
+    return { success: true };
+  } catch (e) {
+    return { error: "Payment deletion failed" };
+  }
 }
