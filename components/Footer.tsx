@@ -78,7 +78,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary-500 flex-shrink-0" />
-                <span className="text-sm">diambakaglobalhospitalityservi@gmail.com</span>
+                <span className="text-sm">equatorbridgespartners@gmail.com</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary-500 flex-shrink-0" />

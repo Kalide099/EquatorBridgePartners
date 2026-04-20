@@ -143,7 +143,7 @@ function PaymentContent() {
                      <div className="flex items-start space-x-4 opacity-60">
                          <Mail className="w-5 h-5 mt-1" />
                          <div>
-                            <p className="font-extrabold text-sm">diambakaglobalhospitalityservi@gmail.com</p>
+                            <p className="font-extrabold text-sm">equatorbridgespartners@gmail.com</p>
                             <p className="text-xs text-slate-500">Invoice & Receipt Dept</p>
                          </div>
                      </div>

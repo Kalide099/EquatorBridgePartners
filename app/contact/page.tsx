@@ -148,7 +148,7 @@ export default function ContactPage() {
                        </div>
                        <div>
                           <h4 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-wide">{t("contact_page.email_title")}</h4>
-                          <p className="text-lg text-slate-600 font-medium break-all">diambakaglobalhospitalityservi@gmail.com</p>
+                          <p className="text-lg text-slate-600 font-medium break-all">equatorbridgespartners@gmail.com</p>
                        </div>
                     </div>
 

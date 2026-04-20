@@ -124,7 +124,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                        <h3 className="text-2xl font-black text-slate-900 mb-2">{t("about.email_title")}</h3>
-                       <p className="text-xl font-medium text-slate-600 transition-colors hover:text-primary-600 break-all">diambakaglobalhospitalityservi@gmail.com</p>
+                       <p className="text-xl font-medium text-slate-600 transition-colors hover:text-primary-600 break-all">equatorbridgespartners@gmail.com</p>
                     </div>
                  </div>
 
